@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ordina il tuo dolce 🍫</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff7f0;
+      text-align: center;
+      padding: 20px;
+    }
+    .step {
+      display: none;
+      margin-top: 30px;
+    }
+    .step.active {
+      display: block;
+    }
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #ff8c42;
+      color: white;
+    }
+    button.secondary {
+      background: #ccc;
+      color: #333;
+    }
+  </style>
+</head>
+<body>  <h1>🍰 Ordine dolce</h1>  <!-- STEP 1 -->  <div class="step active" id="step1">
+    <h2>Vuoi il dolce?</h2>
+    <button onclick="sceltaSiNo('Si')">Sì</button>
+    <button class="secondary" onclick="sceltaSiNo('No')">No</button>
+  </div>  <!-- STEP 2 -->  <div class="step" id="step2">
+    <h2>Scegli il dolce</h2>
+    <button onclick="scegliDolce('Cornetto')">Cornetto</button>
+    <button onclick="scegliDolce('Crêpes')">Crêpes</button>
+    <button onclick="scegliDolce('Nutella')">Nutella</button>
+  </div>  <!-- STEP 3 -->  <div class="step" id="step3">
+    <h2>Scegli il corriere</h2>
+    <button onclick="scegliCorriere('Cucciolino')">Cucciolino</button>
+    <button onclick="scegliCorriere('Giuseppe')">Giuseppe</button>
+  </div>  <!-- STEP 4 -->  <div class="step" id="step4">
+    <h2>Perfetto! 🎉</h2>
+    <p>Tempo di consegna stimato: <strong>15/20 minuti</strong></p>
+  </div>  <script>
+    const ordine = {};
+
+    function mostraStep(id) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function sceltaSiNo(valore) {
+      ordine.vuoleDolce = valore;
+      inviaOrdine();
+      if (valore === 'Si') {
+        mostraStep('step2');
+      } else {
+        alert('Secondo me sì 😏');
+        mostraStep('step2');
+      }
+    }
+
+    function scegliDolce(dolce) {
+      ordine.dolce = dolce;
+      inviaOrdine();
+      mostraStep('step3');
+    }
+
+    function scegliCorriere(corriere) {
+      ordine.corriere = corriere;
+      inviaOrdine();
+      mostraStep('step4');
+    }
+
+    function inviaOrdine() {
+      // QUI puoi collegare Google Forms, SheetDB, Formspree ecc.
+      console.log('Ordine attuale:', ordine);
+    }
+  </script></body>
+</html>
